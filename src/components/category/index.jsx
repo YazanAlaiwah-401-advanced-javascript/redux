@@ -15,7 +15,7 @@ function Category(props) {
           <Button
             onClick={() => {
               props.handelCategory(category.name);
-              props.handelProduct();
+              props.handelProduct(category.name);
             }}
             key={category.name}
             size="small"
@@ -29,7 +29,7 @@ function Category(props) {
   );
 }
 const mapStateToProps = (state) => {
-  return { categories: state.store.categories };
+  return { categories: state.categories.categories };
 };
 
 const actionCreater = { handelCategory, handelProduct };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { addToCart } from '../../store/actions/actions';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 300,
     margin: 10,
+    maxHeight: 300,
   },
   list: {
     display: 'flex',
@@ -25,7 +26,7 @@ function Product(props) {
           <CardMedia
             component="img"
             alt="Contemplative Reptile"
-            height="300"
+            height="150"
             width="10%"
             image={product.image}
             title="Contemplative Reptile"
@@ -37,7 +38,14 @@ function Product(props) {
             <Typography variant="body2" color="textSecondary" component="p">
               {product.description}
             </Typography>
-            <Button size="small" color="primary">
+            <Typography variant="body2" color="textSecondary" component="p">
+              stock : {product.inStock}
+            </Typography>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => props.addToCart(product.name)}
+            >
               Add Cart
             </Button>
             <Button size="small" color="primary">
@@ -50,6 +58,8 @@ function Product(props) {
   );
 }
 const mapStateToProps = (state) => {
-  return { productsList: state.store.productsList };
+  return { productsList: state.products.productsList };
 };
-export default connect(mapStateToProps)(Product);
+const actionCreater = { addToCart };
+
+export default connect(mapStateToProps, actionCreater)(Product);
