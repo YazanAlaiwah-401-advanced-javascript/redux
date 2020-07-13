@@ -1,4 +1,4 @@
-export default [
+let products = [
   {
     description: 'make u watch tv',
     name: 'TV',
@@ -62,3 +62,53 @@ export default [
       'https://toppng.com/uploads/preview/bread-png-image-loaf-of-bread-11563103187ssm8yazedr.png',
   },
 ];
+let initialState = {
+  products,
+  productsList: [],
+};
+export default (state = initialState, action) => {
+  const { type, payload } = action;
+  let productsList;
+  let products;
+  switch (type) {
+    case 'UPDATE PRODUCTS':
+      productsList = state.products.filter(
+        (product) => product.category === payload
+      );
+      return { ...state, productsList };
+    case 'ADD PRODUCT':
+      productsList = state.productsList.map((product) => {
+        if (product.name === payload) {
+          product.inStock--;
+          return product;
+        }
+        return product;
+      });
+      // products = state.products.map((product) => {
+      //   if (product.name === payload) {
+      //     product.inStock--;
+      //     return product;
+      //   }
+      //   return product;
+      // });
+      return { ...state, productsList, products };
+    case 'REMOVE PRODUCT':
+      productsList = state.productsList.map((product) => {
+        if (product.name === payload) {
+          product.inStock++;
+          return product;
+        }
+        return product;
+      });
+      // products = state.products.map((product) => {
+      //   if (product.name === payload) {
+      //     product.inStock++;
+      //     return product;
+      //   }
+      //   return product;
+      // });
+      return { ...state, productsList, products };
+    default:
+      return state;
+  }
+};
