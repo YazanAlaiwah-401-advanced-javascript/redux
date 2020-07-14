@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux';
 
-// import MenuIcon from '@material-ui/icons/Menu';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,13 +27,10 @@ function Header(props) {
           className={classes.menuButton}
           color="black"
           aria-label="menu"
-        >
-          {/* <MenuIcon /> */}
-        </IconButton>
+        ></IconButton>
         <Typography variant="h6" className={classes.title}>
           OUR STORE
         </Typography>
-        {/* <Button color="inherit">Login</Button> */}
         <Typography color="inherit">CART({props.cart.carts.length})</Typography>
       </Toolbar>
     </AppBar>

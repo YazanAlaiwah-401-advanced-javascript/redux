@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { addToCart } from '../../store/actions/actions';
+import { putRemoteProduct } from '../../store/actions/actions';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
@@ -28,7 +28,7 @@ function Product(props) {
             alt="Contemplative Reptile"
             height="150"
             width="10%"
-            image={product.image}
+            image={product.img}
             title="Contemplative Reptile"
           />
           <CardContent>
@@ -44,7 +44,9 @@ function Product(props) {
             <Button
               size="small"
               color="primary"
-              onClick={() => props.addToCart(product.name)}
+              onClick={() =>
+                props.addToCart(product.name, product._id, product.inStock)
+              }
             >
               Add Cart
             </Button>
@@ -60,6 +62,8 @@ function Product(props) {
 const mapStateToProps = (state) => {
   return { productsList: state.products.productsList };
 };
-const actionCreater = { addToCart };
+const actionCreater = (dispatch) => ({
+  addToCart: (id, stock, name) => dispatch(putRemoteProduct(id, stock, name)),
+});
 
 export default connect(mapStateToProps, actionCreater)(Product);
