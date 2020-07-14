@@ -38,12 +38,12 @@ export const getRemoteProduct = function () {
 };
 export const putRemoteProduct = function (name, _id, stock) {
   return (dispatch) => {
-    console.log(_id, stock, name);
     return superagent
       .put(api + '/products/' + _id)
       .send({ inStock: stock - 1 })
       .set('Content-Type', 'application/json')
       .then((response) => {
+        console.log(_id, stock, name);
         dispatch(addToCart(name, _id, stock));
       })
       .catch(console.log);

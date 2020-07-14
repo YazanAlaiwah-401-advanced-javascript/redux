@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
       return { ...state, productsList };
     case 'ADD PRODUCT':
       productsList = state.productsList.map((product) => {
-        if (product.name === payload) {
+        if (product.name === payload.name) {
           product.inStock--;
           return product;
         }
