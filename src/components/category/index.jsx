@@ -14,7 +14,8 @@ function Category(props) {
   useEffect(() => {
     props.getRemoteData();
     props.getRemoteProduct();
-  }, []);
+  });
+
   return (
     <>
       <Typography gutterBottom variant="h5" component="h1">
