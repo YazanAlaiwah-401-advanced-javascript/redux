@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeCart } from '../../store/actions/actions';
+import { deleteRemoteProduct } from '../../store/actions/actions';
 import { makeStyles } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
@@ -23,15 +23,16 @@ function SimpleCart(props) {
   return (
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">
-        {console.log(props.cart, 'hello abd')}
         {props.cart.carts.map((item) => {
           return (
-            <ListItem key={item}>
-              <ListItemText primary={item} />
+            <ListItem key={item._id}>
+              <ListItemText primary={item.name} />
               <ListItemIcon>
                 <DeleteIcon
                   color="secondary"
-                  onClick={() => props.removeCart(item)}
+                  onClick={() =>
+                    props.removeCart(item.name, item._id, item.stock)
+                  }
                 />
               </ListItemIcon>
             </ListItem>
@@ -44,5 +45,8 @@ function SimpleCart(props) {
 const mapStateToProps = (state) => {
   return { cart: state.cart };
 };
-const actionCreater = { removeCart };
+const actionCreater = (dispatch) => ({
+  removeCart: (name, id, stock) =>
+    dispatch(deleteRemoteProduct(name, id, stock)),
+});
 export default connect(mapStateToProps, actionCreater)(SimpleCart);

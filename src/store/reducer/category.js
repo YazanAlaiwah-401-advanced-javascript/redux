@@ -1,9 +1,5 @@
 let initialState = {
-  categories: [
-    { name: 'electronics', displayName: 'Elecronics' },
-    { name: 'food', displayName: 'Food' },
-    { name: 'clothing', displayName: 'Clothing' },
-  ],
+  categories: [],
   activeCategory: '',
 };
 export default (state = initialState, action) => {
@@ -11,6 +7,8 @@ export default (state = initialState, action) => {
   switch (type) {
     case 'UPDATE ACTIVE CATEGORY':
       return { ...state, activeCategory: payload };
+    case 'ADD GETOGRY':
+      return { ...state, categories: payload.results.results };
     default:
       return state;
   }
